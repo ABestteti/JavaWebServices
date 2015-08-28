@@ -84,11 +84,11 @@
     The build.xml file is easily editable if you'd like to make changes.
 -->
 
-<project name="TomcatProject" basedir="." default="usage">  
+<project name="TomcatProject" basedir=".." default="usage">  
 
   <!-- #### Change for your system. #### -->
-  <property name="tomcat.home" value="/home/mkalin/tomcat7"/>
-
+  <!-- <property name="tomcat.home" value="/home/mkalin/tomcat7"/> -->
+  <property name="tomcat.home" value="D:\Java\Apache Software Foundation\Apache Tomcat 7.0.14"/>
   <!-- Leave the rest as they are. -->
   <property name="tomcat.lib"  value="${tomcat.home}/lib"/>
   <property name="deploy.path" value="${tomcat.home}/webapps"/>
@@ -96,7 +96,9 @@
   <property name="src.dir"   value="${basedir}/src"/>  
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
-  <property name="war.name"  value="(Please supply a name!)"/>
+  <property name="war.name"  value="predictions2"/>
+  <property name="war.dir" location="${basedir}/war"/>
+
   
   <property name="name" value="TomcatProject"/>  
   <path id="master-classpath">  
@@ -121,7 +123,7 @@
   <target name="clean" description="clean up">
     <delete dir="${build.dir}" />
     <delete>
-    	<fileset dir="." includes="*.war"/>
+    	<fileset dir="${war.dir}" includes="*.war"/>
     </delete>
   </target>
   
@@ -173,14 +175,14 @@
     <delete>
       <fileset dir="${build.dir}" includes="*.java,*.db,*.jar,web.xml"/>
     </delete>
-    <war destfile="${war.name}.war"  
+    <war destfile="${war.dir}${file.separator}${war.name}.war"  
          webxml="${build.dir}/WEB-INF/web.xml">  
       <fileset dir="${build.dir}">  
         <include name="**/*.*"/>  
       </fileset>  
     </war>  
     <copy todir="${deploy.path}" preservelastmodified="true">  
-      <fileset dir=".">  
+      <fileset dir="${war.dir}">  
         <include name="*.war"/>  
       </fileset>  
     </copy>  
