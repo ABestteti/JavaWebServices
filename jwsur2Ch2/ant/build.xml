@@ -84,10 +84,11 @@
     The build.xml file is easily editable if you'd like to make changes.
 -->
 
-<project name="TomcatProject" basedir="." default="usage">  
+<project name="TomcatProject" basedir=".." default="usage">  
 
   <!-- #### Change for your system. #### -->
-  <property name="tomcat.home" value="/home/mkalin/tomcat7"/>
+  <!-- <property name="tomcat.home" value="/home/mkalin/tomcat7"/> -->
+  <property name="tomcat.home" value="D:\Java\Apache Software Foundation\Apache Tomcat 7.0.14"/>
 
   <!-- Leave the rest as they are. -->
   <property name="tomcat.lib"  value="${tomcat.home}/lib"/>
@@ -96,14 +97,17 @@
   <property name="src.dir"   value="${basedir}/src"/>  
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
-  <property name="war.name"  value="(Please supply a name!)"/>
+  <property name="war.name"  value="predictions2"/>
+  <property name="war.dir" location="${basedir}/war"/>
+  <property name="lib.dir" location="D:\Java\libs"/>
   
   <property name="name" value="TomcatProject"/>  
   <path id="master-classpath">  
     <fileset dir="${tomcat.lib}">  
       <include name="*.jar"/>  
     </fileset>  
-    <fileset dir="${src.dir}">
+    <!--<fileset dir="${src.dir}">-->
+  	<fileset dir="${lib.dir}">
       <include name="*.jar"/>
     </fileset>
     <pathelement path="${build.dir}"/>  
@@ -121,7 +125,7 @@
   <target name="clean" description="clean up">
     <delete dir="${build.dir}" />
     <delete>
-    	<fileset dir="." includes="*.war"/>
+    	<fileset dir="${war.dir}" includes="*.war"/>
     </delete>
   </target>
   
