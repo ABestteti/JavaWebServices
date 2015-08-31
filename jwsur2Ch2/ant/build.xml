@@ -118,7 +118,7 @@
     <echo message="${name} build file"/>  
     <echo message=""/>  
     <echo message="ant compile                 --> to compile only"/>
-    <echo message="ant deploy -Dwar.name=${war.name} --> to deploy test1.war"/>  
+    <echo message="ant deploy -Dwar.name=${war.name} --> to deploy ${war.name}"/>  
     <echo message=""/>  
   </target>  
   
