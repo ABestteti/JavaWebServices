@@ -89,6 +89,7 @@
   <!-- #### Change for your system. #### -->
   <!-- <property name="tomcat.home" value="/home/mkalin/tomcat7"/> -->
   <property name="tomcat.home" value="D:\Java\Apache Software Foundation\Apache Tomcat 7.0.14"/>
+
   <!-- Leave the rest as they are. -->
   <property name="tomcat.lib"  value="${tomcat.home}/lib"/>
   <property name="deploy.path" value="${tomcat.home}/webapps"/>
@@ -96,9 +97,7 @@
   <property name="src.dir"   value="${basedir}/src"/>  
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
-  <property name="war.name"  value="predictions2"/>
-  <property name="war.dir" location="${basedir}/war"/>
-
+  <property name="war.name"  value="(Please supply a name!)"/>
   
   <property name="name" value="TomcatProject"/>  
   <path id="master-classpath">  
@@ -123,7 +122,7 @@
   <target name="clean" description="clean up">
     <delete dir="${build.dir}" />
     <delete>
-    	<fileset dir="${war.dir}" includes="*.war"/>
+    	<fileset dir="." includes="*.war"/>
     </delete>
   </target>
   
@@ -175,14 +174,14 @@
     <delete>
       <fileset dir="${build.dir}" includes="*.java,*.db,*.jar,web.xml"/>
     </delete>
-    <war destfile="${war.dir}${file.separator}${war.name}.war"  
+    <war destfile="${war.name}.war"  
          webxml="${build.dir}/WEB-INF/web.xml">  
       <fileset dir="${build.dir}">  
         <include name="**/*.*"/>  
       </fileset>  
     </war>  
     <copy todir="${deploy.path}" preservelastmodified="true">  
-      <fileset dir="${war.dir}">  
+      <fileset dir=".">  
         <include name="*.war"/>  
       </fileset>  
     </copy>  
