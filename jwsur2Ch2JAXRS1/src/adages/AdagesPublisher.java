@@ -36,6 +36,8 @@ public class AdagesPublisher {
 		catch(Exception e) {
 			throw new RuntimeException(e);
 		}
+		
+		return server;
 	}
 	
 	private void msg(HttpServer server) {
