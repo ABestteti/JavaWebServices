@@ -97,14 +97,17 @@
   <property name="src.dir"   value="${basedir}/src"/>  
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
-  <property name="war.name"  value="(Please supply a name!)"/>
+  <property name="war.name"  value="adages"/>
+  <property name="lib.dir" location="D:\Java\libs"/>
+
   
   <property name="name" value="TomcatProject"/>  
   <path id="master-classpath">  
     <fileset dir="${tomcat.lib}">  
       <include name="*.jar"/>  
     </fileset>  
-    <fileset dir="${src.dir}">
+    <!--<fileset dir="${src.dir}">-->
+    <fileset dir="${lib.dir}">
       <include name="*.jar"/>
     </fileset>
     <pathelement path="${build.dir}"/>  
@@ -154,7 +157,8 @@
       </fileset>
     </copy>
     <copy todir="${build.dir}/WEB-INF/lib">
-      <fileset dir="${src.dir}">
+      <!-- <fileset dir="${src.dir}"> -->
+      <fileset dir="${lib.dir}">
         <include name="*.jar"/>
       </fileset>
     </copy>
