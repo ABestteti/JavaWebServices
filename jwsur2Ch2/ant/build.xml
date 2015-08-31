@@ -157,7 +157,8 @@
       </fileset>
     </copy>
     <copy todir="${build.dir}/WEB-INF/lib">
-      <fileset dir="${src.dir}">
+      <!-- <fileset dir="${src.dir}"> -->
+      <fileset dir="${lib.dir}">
         <include name="*.jar"/>
       </fileset>
     </copy>
@@ -177,14 +178,16 @@
     <delete>
       <fileset dir="${build.dir}" includes="*.java,*.db,*.jar,web.xml"/>
     </delete>
-    <war destfile="${war.name}.war"  
+    <!-- <war destfile="${war.name}.war" -->
+  	<war destfile="${war.dir}${file.separator}${war.name}.war"
          webxml="${build.dir}/WEB-INF/web.xml">  
       <fileset dir="${build.dir}">  
         <include name="**/*.*"/>  
       </fileset>  
     </war>  
     <copy todir="${deploy.path}" preservelastmodified="true">  
-      <fileset dir=".">  
+      <!-- <fileset dir="."> -->
+      <fileset dir="${war.dir}">
         <include name="*.war"/>  
       </fileset>  
     </copy>  
