@@ -76,7 +76,7 @@ public class PredictionsRS {
 		checkContext();
 		String msg = null;
 		
-		//Require both preperties to create.
+		//Require both properties to create.
 		if (who == null || what == null) {
 			msg = "Property 'who' or 'what' is missing.\n";
 			return Response.status(Response.Status.BAD_REQUEST).entity(msg).type(MediaType.TEXT_PLAIN).build();			
@@ -85,6 +85,59 @@ public class PredictionsRS {
 		int id = addPrediction(who, what);
 		msg = "Prediction "+id+" created:(who="+who+" and what="+what+").\n";
 		return Response.ok(msg, "text/plain").build();
+	}
+	
+	@PUT
+	@Produces({MediaType.TEXT_PLAIN})
+	@Path("/update")
+	public Response update(@FormParam("id")   int id,
+			               @FormParam("who")  String who,
+			               @FormParam("what") String what) {
+		checkContext();
+		
+		//Check that sufficient data is present to do an edit
+		String msg = null;
+		
+		if (who == null || what == null) {
+			msg = "Neither who nor what is given: nothing to edit.\n";
+		}
+		
+		Prediction p = plist.find(id);
+		
+		if (p == null) {
+			msg = "The is no prediction with ID " + id + "\n";
+		}
+		
+		if (msg != null) {
+			return Response.status(Response.Status.BAD_REQUEST).entity(msg).type(MediaType.TEXT_PLAIN).build();
+		}
+		
+		//Update
+		p.setWho(who);
+		p.setWhat(what);
+		
+		msg = "Prediction " + id + " has been updated.";
+		
+		return Response.ok(msg, "text/plain").build();
+	}
+	
+	@DELETE
+	@Produces({MediaType.TEXT_PLAIN})
+	@Path("/delete/{id: \\d+")
+	public Response delete(@PathParam("id") int id) {
+		checkContext();
+		String msg = null;
+		
+		Prediction p = plist.find(id);
+		
+		if (p == null) {
+			msg = "There is no Prediction with ID " + id + "\n";
+			return Response.status(Response.Status.BAD_REQUEST).entity(msg).type(MediaType.TEXT_PLAIN).build();
+		}
+		
+		plist.getPredictions().remove(id);
+		msg = "Prediction " + id + " deleted.\n";
+		return Response.ok(msg,"text/plain").build();
 	}
 	
 	private void checkContext() {
@@ -103,7 +156,6 @@ public class PredictionsRS {
 		if (in != null) {
 			try {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-				int i = 0;
 				String record = null;
 				
 				while ((record = reader.readLine()) != null) {
@@ -121,4 +173,21 @@ public class PredictionsRS {
 		int id = plist.add(who, what);		
 		return id;
 	}
+	
+	//Prediction --> JSON document
+	private String toJson(Prediction prediction) {
+		String json = "If you this message, there is a problem.";
+		
+		try {
+			json = new ObjectMapper().writeValueAsString(prediction);			
+		}
+		catch (Exception e) {
+			
+		}
+		
+		return json;
+	}
+	
+	//PredictionList --> JSON document
+	
 }
