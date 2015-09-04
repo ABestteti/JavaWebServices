@@ -97,7 +97,7 @@
   <property name="src.dir"   value="${basedir}/src"/>  
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
-  <property name="war.name"  value="adages"/>
+  <property name="war.name"  value="predictions3"/>
   <property name="lib.dir" location="D:\Java\libs"/>
   
   <property name="name" value="TomcatProject"/>  
