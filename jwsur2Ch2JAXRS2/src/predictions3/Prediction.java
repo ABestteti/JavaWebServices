@@ -13,7 +13,7 @@ public class Prediction implements Comparable<Prediction> {
 	
 	@Override
 	public String toString() {
-		return String.format("%2d", id) + who + " ==>" + what + "\n";
+		return String.format("%2d", id) + " : " + who + " ==> " + what + "\n";
 	}
 
 	@XmlElement
