@@ -188,6 +188,33 @@ public class PredictionsRS {
 		return json;
 	}
 	
-	//PredictionList --> JSON document
+	//PredictionsList --> JSON document
+	private String toJson(PredictionsList plist) {
+		String json = "If you this message, there is a problem.";
+		try {
+			json = new ObjectMapper().writeValueAsString(plist);
+		}
+		catch (Exception e) {}
+		return json;		
+	}
 	
+	//Generate an HTTP error response or typed OK response.
+	private Response toRequestedType(int id, String type) {
+		Prediction pred = plist.find(id);
+		if (pred == null) {
+			String msg = id + " is a bad ID.\n";
+			return Response.status(Response.Status.BAD_REQUEST).
+					                               entity(msg).
+					                               type(MediaType.TEXT_PLAIN).
+					                               build();
+		}
+		else {
+			if (type.contains("json")) {
+				return Response.ok(toJson(pred), type).build();
+			}
+			else {
+				return Response.ok(pred, type).build(); //toXML is automatic
+			}
+		}
+	}
 }
