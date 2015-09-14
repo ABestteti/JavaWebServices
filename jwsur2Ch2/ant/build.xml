@@ -135,6 +135,7 @@
     <mkdir dir="${build.dir}/WEB-INF/classes"/>
     <mkdir dir="${build.dir}/WEB-INF/lib"/>
     <mkdir dir="${build.dir}/WEB-INF/data"/>
+  	<mkdir dir="${basedir}/war"/>
     
     <!-- Copy files from source to build directory  -->
     <copy todir="${build.dir}">
