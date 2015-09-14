@@ -98,6 +98,7 @@
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
   <property name="war.name"  value="aphorism2"/>
+  <property name="war.dir" location="${basedir}/war"/>
   <property name="lib.dir" location="D:\Java\libs"/>
 	  
   <property name="name" value="TomcatProject"/>  
@@ -124,6 +125,9 @@
   
   <target name="clean" description="clean up">
     <delete dir="${build.dir}" />
+    <delete failonerror="no">
+    	<fileset dir="${war.dir}" includes="*.war"/>
+    </delete>  	
   </target>
   
   <target name="prepare" depends="clean">
@@ -132,6 +136,7 @@
     <mkdir dir="${build.dir}/WEB-INF/classes"/>
     <mkdir dir="${build.dir}/WEB-INF/lib"/>
     <mkdir dir="${build.dir}/WEB-INF/data"/>
+  	<mkdir dir="${basedir}/war"/>
     
     <!-- Copy files from source to build directory  -->
     <copy todir="${build.dir}">
@@ -176,14 +181,16 @@
     <delete>
       <fileset dir="${build.dir}" includes="*.java,*.db,*.jar,web.xml"/>
     </delete>
-    <war destfile="${war.name}.war"  
+    <!-- <war destfile="${war.name}.war" -->
+  	<war destfile="${war.dir}${file.separator}${war.name}.war"
          webxml="${build.dir}/WEB-INF/web.xml">  
       <fileset dir="${build.dir}">  
         <include name="**/*.*"/>  
       </fileset>  
     </war>  
     <copy todir="${deploy.path}" preservelastmodified="true">  
-      <fileset dir=".">  
+      <!-- <fileset dir="."> -->
+      <fileset dir="${war.dir}">
         <include name="*.war"/>  
       </fileset>  
     </copy>  
