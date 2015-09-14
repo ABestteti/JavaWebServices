@@ -97,7 +97,7 @@
   <property name="src.dir"   value="${basedir}/src"/>  
   <property name="build.dir" value="${basedir}/build"/>  
   <property name="dist.dir"  value="${basedir}/dist"/>
-  <property name="war.name"  value="aphorism2"/>
+  <property name="war.name"  value="adages2"/>
   <property name="war.dir" location="${basedir}/war"/>
   <property name="lib.dir" location="D:\Java\libs"/>
 	  
